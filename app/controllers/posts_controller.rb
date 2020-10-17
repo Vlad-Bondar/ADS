@@ -4,12 +4,13 @@ class PostsController < ApplicationController
     before_action :authenticate_user!, except: [:index , :show]
     
     def index
-        @posts = Post.all
-        
+        @posts = Post.includes(:user).where("status = ?", "published").page(params[:page])
+        #byebug
     end
 
     def show 
         @post = Post.find(params[:id])
+        
         #byebug
     end
 
@@ -21,7 +22,7 @@ class PostsController < ApplicationController
 
         @post = Post.new(post_params)
         @post.user_id = current_user.id
-
+        @post.approved!
         if @post.save 
             redirect_to '/posts/' + @post.id.to_s
         else
