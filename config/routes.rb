@@ -3,5 +3,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "posts#index"
   
-  resources :posts
+
+  get 'posts/user_posts',   to: 'posts#user_posts'
+  resources :posts 
+  resources :categories , only: [:create , :new ]
 end

@@ -1,10 +1,12 @@
-<%= form_with model: @post , url: path , method: method  do |post| %>
+<%= form_for @post , url: path , multiple: true ,method: method  do |post| %>
     <div class="container">
+
         <% if method.to_s == "post"%>
             <h1>New Post</h1>
         <%else%>
             <h1>Edit Post</h1>
         <%end%>
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">    
                 <%= post.label :header, class: "input-group-text"  %>
@@ -12,14 +14,31 @@
             <%= post.text_field :header, class: "form-control" %>
         </div>
 
+         
+        <div class="form-group">
+        <label for="exampleFormControlSelect1">Choose category</label>
+               <%=select(:post,:category_id, options_from_collection_for_select(@categories, "id", "title", @post.present? ? @post.category_id : nil),{prompt: :true},{class: "form-control"})%>  
+        </div> 
+        
+        <div class="form-group">
+            <h3>Or create a category:</h3>
+            <%= post.fields_for :category do |category|%>
+                <%= category.label  "New category title:"%>
+                <%= category.text_field :title , class: "form-control"%>
+            <%end%>
+        </div>
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">    
                 <%= post.label :body, class: "input-group-text"  %>
             </div>
-            <%= post.text_area :body , class: "form-control" %>
+            <%= post.text_area :body , class: "form-control" %>  
         </div>
+
+        <%= post.file_field :images , multiple: true %>
         <div class="mt-3">
             <%= post.submit 'Publish', class:"btn btn-success mb-2" %>
         </div>
     </div>
 <%end%>
+

@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+# Use cancancan for authorization
+gem 'cancancan'
 #Use devise for autentication
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -22,8 +24,14 @@ gem 'jbuilder', '~> 2.7'
 # Use whenever for automatic posting
 gem 'whenever', require: false
 # Use kaminari for pagination
-gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
+gem 'kaminari'
+# Use carrierwave to add image
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick'
+# Use to add new category inside post view
+#gem "nested_form"
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -42,12 +50,12 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'letter_opener'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'letter_opener'
 end
 
 group :test do
