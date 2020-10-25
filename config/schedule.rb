@@ -12,7 +12,9 @@
 #   runner "MyModel.some_method"
 #   rake "some:great:rake:task"
 # end
-#
+#every 1.day at: "10:44 pm"  do
+#runner "Post.publish_posts"
+#end
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
@@ -21,10 +23,14 @@
 
 set :output, "log/cron.log"
 
-every 1.day at: "3:00 am"  do
-    runner "Post.publishing_posts"
+#every 1.minute   do
+#    runner "Post.publish_posts"
+#end
+
+every 1.day at: "00:00 am"  do
+ runner "Post.publish_posts"
 end
 
 every 1.day at: "11:50 pm"  do
-    runner  "Post.archiving_posts"
+ runner  "Post.archive_posts"
 end

@@ -7,15 +7,15 @@
                     <div class="card mx-3 my-3 text-center" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title"><%= post.header %></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">id:<%= post.id %></h6>
                             <h6 class="card-subtitle mb-2 text-muted">author:<%= post.user.user_name %></h6>
                             <h6 class="card-subtitle mb-2 text-muted">status:<%= post.status %></h6>
                             <p class="card-text"><%= post.body %></p>
-
                             <div class="btn-group btn-group-sm mx-2 mb-2 " role="group">
-                                <% if post.status==Post.statuses[:draft]%>
-                                    <a href="/posts/edit/<%= post.id%>" class="btn btn-secondary bg-light text-muted border border-white">Edit </a> 
+                                <% if post.status==Post.statuses[:draft] || post.status==Post.statuses[:archived]%>
+                                    <a href="/posts/<%= post.id%>/edit" class="btn btn-secondary bg-light text-muted border border-white">Edit </a> 
                                 <%end%>
-                                <a href="#" class="btn btn-secondary bg-light text-muted border border-white"> Delete </a>
+                                <%= link_to 'Delete', post,class: "btn btn-secondary bg-light text-muted border border-white", method: :delete, data: { confirm: 'Are you sure?' } %>
                             </div>                           
                         </div>
                     </div>

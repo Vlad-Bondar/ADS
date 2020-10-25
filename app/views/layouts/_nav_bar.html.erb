@@ -11,9 +11,11 @@
       <li class="nav-item">
         <a class="nav-link" href="/posts/user_posts">User posts</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
+      <%if user_signed_in? && current_user.admin?%>
+        <li class="nav-item">
+          <a class="nav-link" href="/posts/posts_for_admin">Pricing</a>
+        </li>
+      <%end%>
     </ul>
     <%if user_signed_in?%>
     <div class="btn-group">

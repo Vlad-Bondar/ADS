@@ -29,8 +29,8 @@ gem 'kaminari'
 # Use carrierwave to add image
 gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
-# Use to add new category inside post view
-#gem "nested_form"
+# Use to bild admin panel
+gem 'rails_admin', '~> 2.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

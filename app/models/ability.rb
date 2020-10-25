@@ -9,12 +9,31 @@ class Ability
     
     # Define abilities for the passed in user here. For example:
     #
-       user ||= User.new # guest user (not logged in)
-       if user.admin?
-         can :manage, :all
-       else
-         can :read, :all
-       end
+   #user ||= User.new # guest user (not logged in)
+   
+   if user.admin?
+     can :create, Category
+     can :manage, User
+     can :edit , Post do |post|
+      post.status == Post.statuses[:new_post]
+     end
+   else
+     can :create, Post 
+
+     can :delete, Post do |post|
+      post.user_id == user.id
+     end
+     
+     can :edit, Post do |post|
+      post.user_id = user.id &&(post.status == Post.statuses[:draft] || post.status == Post.statuses[:archived])
+     end
+
+     can :manage, User do |u|
+      u.id == user.id
+     end
+
+     can :read , Post
+   end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
