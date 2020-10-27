@@ -13,6 +13,13 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def destroy 
+    @category = Category.find(params[:id])
+    if @category.destroy
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   private
 
   def category_params

@@ -2,21 +2,17 @@
 
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
+  before_action :set_post, only: %i[show edit update destroy]  
 
   def index
     @posts = Post.includes(:user).where('status = ?', 'published').page(params[:page])
-
-    # byebug
   end
 
-  def show
-    @post = Post.find(params[:id])
-
-    # byebug
-  end
+  def show; end
 
   def new
     @categories = Category.all
+    #byebug
     @post = Post.new
     authorize! :create, @post
     @post.build_category
@@ -39,13 +35,14 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
     authorize! :edit, @post
     @categories = Category.all
+    @empty_category = find_empty_category
   end
 
   def update
-    @post = Post.find(params[:id])
+    
     @post.status = params[:status]
 
     if @post.update(post_params)
@@ -64,7 +61,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    
     @post.destroy
     redirect_to root_path
   end
@@ -72,14 +69,19 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:header, :body, :category_id, { images: [] }, category_attributes: [:title])
+    params.require(:post).permit(:header, :body, :category_id, { images: [] }, category_attributes: [:title,:_destroy])
   end
 
-  def change_post_status(status)
-    if current_user.admin?
-      status == Post.statuses[:rejected] ? Post.statuses[:rejected] : Post.statuses[:approved]
-    else
-      status ? Post.statuses[:new_post] : Post.statuses[:draft]
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def find_empty_category
+    categories = Category.all
+    empty_category = []
+    categories.each do |category|
+      empty_category << category if category.posts.empty?
     end
+    empty_category
   end
 end

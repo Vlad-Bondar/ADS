@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   resources :posts do
     resources :images, only: [:create , :destroy]
   end
-  resources :categories , only: [:create , :new ]
+  resources :categories , only: [:create , :new , :destroy]
 end

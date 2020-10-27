@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  validates :header, :body , presence: true
+  POST_LIFETIME = 3.days
+
+  validates :header, :body, presence: true
   belongs_to :user
   belongs_to :category
- 
-  mount_uploaders :images , AttachmentUploader
 
-  accepts_nested_attributes_for :category , reject_if: :all_blank
-  
+  mount_uploaders :images, AttachmentUploader
+
+  accepts_nested_attributes_for :category, reject_if: :all_blank,allow_destroy: :true
 
   enum status: {
     draft: 'draft',
@@ -27,11 +28,7 @@ class Post < ApplicationRecord
   def self.archive_posts
     posts = Post.where('status = ?', Post.statuses[:published])
     posts.each do |post|
-      post.archived! if Time.now - post.created_at >= 3.days
+      post.archived! if Time.now - post.created_at >= POST_LIFETIME
     end
   end
-
 end
-
-
-

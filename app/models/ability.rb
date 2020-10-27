@@ -15,7 +15,7 @@ class Ability
      can :create, Category
      can :manage, User
      can :edit , Post do |post|
-      post.status == Post.statuses[:new_post]
+     post.status == Post.statuses[:new_post] || post.user_id == user.id
      end
    else
      can :create, Post 
