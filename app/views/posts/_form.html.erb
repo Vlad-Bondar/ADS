@@ -50,7 +50,7 @@
         <% if can? :create , Category %>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Choose category</label>
-                <%=select(:post,:category_id, options_from_collection_for_select(@categories, "id", "title",  @post.category_id ,{},{class: "form-control"}))%>
+                <%=select(:post,:category_id, options_from_collection_for_select(@categories, "id", "title",  @post.category_id ),{},{class: "form-control"})%>
             </div> 
             
             <div class="form-group">
