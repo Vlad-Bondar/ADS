@@ -1,0 +1,24 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  a.navbar-brand href="#"  Navbar w/ text
+  button.navbar-toggler aria-controls="navbarText" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarText" data-toggle="collapse" type="button" 
+    span.navbar-toggler-icon
+  #navbarText.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item
+        a.nav-link href="/posts"  Home
+      li.nav-item
+        a.nav-link href="/posts/user_posts"  User posts
+      - if user_signed_in? && current_user.admin?
+        li.nav-item
+          a.nav-link href="/posts/posts_for_admin"  Posts for approval
+    - if user_signed_in?
+      .btn-group
+        button.btn.btn-outline-dark.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
+          = current_user.user_name
+        .dropdown-menu.dropdown-menu-right
+          = link_to 'Create post', new_post_path, class: "dropdown-item"
+          = link_to 'Edit profile', edit_user_registration_path,  class: "dropdown-item"
+          = link_to 'Sign Out', destroy_user_session_path, method: :delete , class: "dropdown-item"
+    - else
+      a.btn.btn-outline-dark.mx-2.my-sm-0 href="<haml_loud" role="button"  new_user_session_path  &gt; Sign in
+      a.btn.btn-outline-dark.mx-2.my-sm-0 href="<haml_loud" role="button"  new_user_registration_path &gt; Sign up

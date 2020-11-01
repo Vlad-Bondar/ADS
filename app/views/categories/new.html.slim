@@ -1,0 +1,9 @@
+= form_with model: @category , url: categories_path  , method: "post"  do |c|
+  .container
+    h1 New category
+    .input-group.mb-3
+      .input-group-prepend
+        = c.label :title, class: "input-group-text"
+      = c.text_field :title, class: "form-control"
+    .mt-3
+      = c.submit 'Create', class:"btn btn-success mb-2"

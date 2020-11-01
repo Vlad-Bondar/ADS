@@ -1,0 +1,29 @@
+.container
+  .row.mt-6.my-3
+    h3
+      | User Posts 
+    .col-lg-12
+      .row
+        - @posts.each do |post|
+          .card.mx-3.my-3.text-center[style="width: 18rem;"]
+            .card-body
+              h5.card-title
+                = post.header
+              h6.card-subtitle.mb-2.text-muted
+                | id:
+                = post.id
+              h6.card-subtitle.mb-2.text-muted
+                | author:
+                = post.user.user_name
+              h6.card-subtitle.mb-2.text-muted
+                | status:
+                = post.status
+              p.card-text
+                = post.body
+              .btn-group.btn-group-sm.mx-2.mb-2[role="group"]
+                - if post.status==Post.statuses[:draft] || post.status==Post.statuses[:archived]
+                  |  <a href="/posts/
+                  = post.id
+                  | /edit" class="btn btn-secondary bg-light text-muted border border-white">Edit 
+                = link_to 'Delete', post,class: "btn btn-secondary bg-light text-muted border border-white", method: :delete, data: { confirm: 'Are you sure?' }
+  = paginate @posts , theme: 'twitter-bootstrap-4'

@@ -1,11 +1,22 @@
 # frozen_string_literal: true
+require '/home/vlad/twinslah/ADS/lib/posts_method.rb'
 
 class PostsController < ApplicationController
+  include PostsMethods
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_post, only: %i[show edit update destroy]  
 
   def index
-    @posts = Post.includes(:user).where('status = ?', 'published').page(params[:page])
+    #@posts = Post.includes(:user).where('status = ?', 'published').page(params[:page])
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true).where('status = ?', 'published').includes(:user).includes(:category).page(params[:page])
+    
+    respond_to do |format|
+      format.html  #index.html.erb
+      format.json { render json: @posts }
+      format.js #index.js.erb
+    end
+    #byebug
   end
 
   def show; end
@@ -60,6 +71,11 @@ class PostsController < ApplicationController
     @posts = Post.where('status = ?', 'new_post').page(params[:page])
   end
 
+  def sort_posts
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.where('status = ?', 'published').includes(:user).includes(:category).page(params[:page])
+  end
+
   def destroy
     
     @post.destroy
@@ -76,12 +92,5 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def find_empty_category
-    categories = Category.all
-    empty_category = []
-    categories.each do |category|
-      empty_category << category if category.posts.empty?
-    end
-    empty_category
-  end
+
 end

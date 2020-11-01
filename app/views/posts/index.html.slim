@@ -1,0 +1,18 @@
+#indexDiv.container
+  .row.mt-6.my-3
+    h3 All Posts
+    
+    .col-lg-12
+    = search_form_for @q , :remote=>"true", url: posts_path, html: {method: :get}  do |f|
+      .container
+        .input-group.mb-2
+          = f.label 'Сategory search', class: 'mr-2'
+          = f.select :category_id_eq, options_from_collection_for_select(find_published_categories, "id", "title", @q.category_id_eq), include_blank: true 
+        .input-group.mb-2
+          = f.label 'User search', class: 'mr-2'
+          = f.select :user_id_eq, options_from_collection_for_select(find_published_users, "id", "user_name", @q.user_id_eq), include_blank: true
+      = f.submit 'Search'
+
+      .sort_index
+        = render partial: "index"
+  

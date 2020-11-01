@@ -1,0 +1,31 @@
+form
+  .container
+    h4 Show post
+    hr/
+    .form-group.row
+      label.col-sm-2.col-form-label Header:
+      .col-sm-10
+        label.col-sm-2.col-form-label= @post.header
+    .form-group.row
+      label.col-sm-2.col-form-label for="inputPassword"  Body:
+      .col-sm-10
+        label.col-sm-2.col-form-label= @post.body
+    .form-group.row
+      label.col-sm-2.col-form-label for="inputPassword"  Author:
+      .col-sm-10
+        label.col-sm-2.col-form-label= @post.user.user_name
+    .form-group.row
+      label.col-sm-2.col-form-label for="inputPassword"  Category:
+      .col-sm-10
+        label.col-sm-2.col-form-label= @post.category.title
+    #carouselExampleControls.carousel.slide data-ride="carousel" 
+      .carousel-inner
+        - @post.images.each do |image|
+          div class=("carousel-item #{"active" if @post.images[0] == image}") 
+            = image_tag(image.thumb.url, alt: 'Image' , class:"rounded-top" ) if @post.images?
+      a.carousel-control-prev data-slide="prev" href="#carouselExampleControls" role="button" 
+        span.carousel-control-prev-icon aria-hidden="true" 
+        span.sr-only Previous
+      a.carousel-control-next data-slide="next" href="#carouselExampleControls" role="button" 
+        span.carousel-control-next-icon aria-hidden="true" 
+        span.sr-only Next

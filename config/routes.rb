@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'posts/posts_for_admin', to: 'posts#posts_for_admin'
   get 'posts/user_posts',   to: 'posts#user_posts'
+  get 'posts/sort_posts',   to: 'posts#sort_posts'
   resources :posts do
     resources :images, only: [:create , :destroy]
   end

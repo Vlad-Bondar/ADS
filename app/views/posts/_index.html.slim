@@ -1,0 +1,17 @@
+.container
+  .row.mt-6.my-3
+    h3
+      | User Posts 
+    .col-lg-12
+      .row
+        - @posts.each do |post|
+          .card.mx-3.my-3.text-center style=("width: 18rem;") 
+            .card-body
+              h5.card-title= post.header
+              h6.card-subtitle.mb-2.text-muted
+              | author:#{post.user.user_name}
+              h6.card-subtitle.mb-2.text-muted
+              | author:#{post.category.title}
+              p.card-text= post.body
+              a.card-link href="/posts/#{post.id}"  Link
+        = paginate @posts , theme: 'twitter-bootstrap-4'

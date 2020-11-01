@@ -1,6 +1,8 @@
 # frozen_string_literal: true
+require '/home/vlad/twinslah/ADS/lib/images_method.rb'
 
 class ImagesController < ApplicationController
+  include ImagesMethods
   before_action :set_posts_image
 
   def create
@@ -23,19 +25,6 @@ class ImagesController < ApplicationController
 
   def set_posts_image
     @post = Post.find(params[:post_id])
-  end
-
-  def add_more_images(new_images)
-    images = @post.images
-    images += new_images
-    @post.images = images
-  end
-
-  def remove_image_at_index(index)
-    remain_images = @post.images 
-    deleted_image = remain_images.delete_at(index) 
-    deleted_image.try(:remove!) 
-    @post.images = remain_images 
   end
 
   def images_params

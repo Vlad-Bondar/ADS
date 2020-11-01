@@ -31,6 +31,10 @@ gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
 # Use to bild admin panel
 gem 'rails_admin', '~> 2.0'
+# Use to write views in .slim format
+gem "slim-rails"
+# Used to filter the posts
+gem "ransack"
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
