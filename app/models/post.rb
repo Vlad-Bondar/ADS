@@ -31,27 +31,4 @@ class Post < ApplicationRecord
       post.archived! if Time.now - post.created_at >= POST_LIFETIME
     end
   end
-
-  def find_empty_category
-    categories = Category.all
-    empty_category = []
-    categories.each do |category|
-      empty_category << category if category.posts.empty?
-    end
-    empty_category
-  end
-  
-  def add_more_images(new_images)
-    images = @post.images
-    images += new_images
-    @post.images = images
-  end
-
-  def remove_image_at_index(index)
-    remain_images = @post.images 
-    deleted_image = remain_images.delete_at(index) 
-    deleted_image.try(:remove!) 
-    @post.images = remain_images 
-  end
-
 end

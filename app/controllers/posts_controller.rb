@@ -71,11 +71,6 @@ class PostsController < ApplicationController
     @posts = Post.where('status = ?', 'new_post').page(params[:page])
   end
 
-  def sort_posts
-    @q = Post.ransack(params[:q])
-    @posts = @q.result.where('status = ?', 'published').includes(:user).includes(:category).page(params[:page])
-  end
-
   def destroy
     
     @post.destroy

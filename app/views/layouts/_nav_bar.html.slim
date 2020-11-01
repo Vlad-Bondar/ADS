@@ -20,5 +20,5 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
           = link_to 'Edit profile', edit_user_registration_path,  class: "dropdown-item"
           = link_to 'Sign Out', destroy_user_session_path, method: :delete , class: "dropdown-item"
     - else
-      a.btn.btn-outline-dark.mx-2.my-sm-0 href="<haml_loud" role="button"  new_user_session_path  &gt; Sign in
-      a.btn.btn-outline-dark.mx-2.my-sm-0 href="<haml_loud" role="button"  new_user_registration_path &gt; Sign up
+      a.btn.btn-outline-dark.mx-2.my-sm-0 href= new_user_session_path role="button" Sign in
+      a.btn.btn-outline-dark.mx-2.my-sm-0 href= new_user_registration_path role="button" Sign up
