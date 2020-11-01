@@ -40,7 +40,7 @@
 yarn-debug.log*
 .yarn-integrity
 
-.idea/*
-.vscode/*
+.idea
+.vscode
 config/*.yml
 
