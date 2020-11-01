@@ -42,5 +42,8 @@ yarn-debug.log*
 
 .idea
 .vscode
-config/*.yml
+/config/webpacker.yml
+/config/storage.yml
+/config/cable.yml
+/config/database.yml
 
