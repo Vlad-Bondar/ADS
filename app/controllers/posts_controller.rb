@@ -63,14 +63,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def user_posts
-    @posts = User.find(current_user.id).posts.page(params[:page])
-  end
-
-  def posts_for_admin
-    @posts = Post.where('status = ?', 'new_post').page(params[:page])
-  end
-
   def destroy
     
     @post.destroy
