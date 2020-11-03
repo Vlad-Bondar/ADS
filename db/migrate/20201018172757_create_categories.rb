@@ -4,8 +4,7 @@ class CreateCategories < ActiveRecord::Migration[6.0]
       t.string :category 
       t.timestamps
     end
-
-    add_reference(:posts , :category)
+    
     #Ex:- add_column("admin_users", "username", :string, :limit =>25, :after => "email")
   end
 
