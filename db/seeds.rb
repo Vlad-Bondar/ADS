@@ -6,6 +6,18 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+User.create(id:1 ,user_name: 'user1' ,email:'user1@user.mail' ,password:'123456' ,confirmed_at: Time.now)
+User.create(id:3 ,user_name: 'user2' ,email:'user2@user.mail' ,password:'123456' ,confirmed_at: Time.now)
+User.create(id:2 ,user_name: 'admin',email: 'admin@admin.mail',password:'123456',confirmed_at: Time.now, admin: true,super_admin: true)
+
+Category.create(id: 1 ,title: 'Sport' )
+Category.create(id: 2 ,title: 'Car' )
+Category.create(id: 3 ,title: 'Nature') 
+Category.create(id: 4 ,title: 'Money' )
+Category.create(id: 5 ,title: 'Other' )
+Category.create(id: 6 ,title: 'Home' )
+
 Post.create(header: 'Sport 1',body: 'Sport 1',category_id: 1 ,user_id: 1,status: Post.statuses[:draft] )
 Post.create(header: 'Sport 2',body: 'Sport 2',category_id: 1 ,user_id: 3,status: Post.statuses[:published])
 Post.create(header: 'Sport 3',body: 'Sport 3',category_id: 1 ,user_id: 3,status: Post.statuses[:new_post])
@@ -31,15 +43,4 @@ Post.create(header: 'Other 2',body: 'Other 2',category_id: 5,user_id: 3,status: 
 Post.create(header: 'Other 3',body: 'Other 3',category_id: 5,user_id: 1,status: Post.statuses[:published])
 Post.create(header: 'Other 4',body: 'Other 4',category_id: 5,user_id: 3,status: Post.statuses[:archived])
 Post.create(header: 'Other 5',body: 'Other 5',category_id: 5,user_id: 1,status: Post.statuses[:new_post])
-=begin
-User.create(id:1 ,user_name: 'user1' ,email:'user1@user.mail' ,password:'123456' ,confirmed_at: Time.now)
-User.create(id:3 ,user_name: 'user2' ,email:'user2@user.mail' ,password:'123456' ,confirmed_at: Time.now)
-User.create(id:2 ,user_name: 'admin',email: 'admin@admin.mail',password:'123456',confirmed_at: Time.now, admin: true,super_admin: true)
 
-Category.create(id: 1 ,title: 'Sport' )
-Category.create(id: 2 ,title: 'Car' )
-Category.create(id: 3 ,title: 'Nature') 
-Category.create(id: 4 ,title: 'Money' )
-Category.create(id: 5 ,title: 'Other' )
-Category.create(id: 6 ,title: 'Home' )
-=end
