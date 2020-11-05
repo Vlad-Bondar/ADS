@@ -11,7 +11,7 @@
               h6.card-subtitle.mb-2.text-muted
               | author:#{post.user.user_name}
               h6.card-subtitle.mb-2.text-muted
-              | author:#{post.category.title}
+              | categoy:#{post.category.title}
               p.card-text= post.body
               a.card-link href="/posts/#{post.id}"  Link
         = paginate @posts , theme: 'twitter-bootstrap-4'

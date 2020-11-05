@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-require '/home/vlad/twinslah/ADS/lib/posts_method.rb'
+
+$LOAD_PATH << File.join(__dir__, "lib")
+require 'posts_method.rb'
 
 class PostsController < ApplicationController
   include PostsMethods
