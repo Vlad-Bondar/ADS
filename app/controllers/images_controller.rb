@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-require '/home/vlad/twinslah/ADS/lib/images_method.rb'
+
+$LOAD_PATH << File.join(__dir__, "lib")
+require 'images_method.rb'
 
 class ImagesController < ApplicationController
   include ImagesMethods
