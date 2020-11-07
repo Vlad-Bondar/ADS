@@ -5,6 +5,7 @@ require 'posts_method.rb'
 
 class PostsController < ApplicationController
   include PostsMethods
+
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_post, only: %i[show edit update destroy]  
 
@@ -55,7 +56,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    
     @post.status = params[:status]
 
     if @post.update(post_params)

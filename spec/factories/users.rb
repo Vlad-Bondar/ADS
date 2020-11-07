@@ -8,4 +8,11 @@ FactoryBot.define do
     confirmed_at { Time.now }
     admin { false }
   end
+  factory :admin, class: 'User' do
+    user_name { 'Admin' }
+    sequence(:email) { |i| "test@#{i}test.test" }
+    password { 'test123' }
+    confirmed_at { Time.now }
+    admin { true }
+  end
 end

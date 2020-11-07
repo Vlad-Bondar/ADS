@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.feature 'Action', type: :feature do
-
   let(:user) { create(:user) }
   let(:post) { create(:post) }
   let(:category) { create(:category) }
@@ -11,7 +10,7 @@ RSpec.feature 'Action', type: :feature do
     login_as(user, scope: :user)
   end
 
-  context "index"  do
+  context 'index'  do
     scenario 'Should see all posts' do
       visit root_path
       expect(page).to have_text('All Posts')
@@ -25,8 +24,8 @@ RSpec.feature 'Action', type: :feature do
     end
   end
 
-  context 'create' do
-    let!(:category) { create(:category) }
+  context 'create post' do
+    let!(:category) { create(:category, id: 1) }
     scenario 'should be successful' do
       visit new_post_path
       within('form') do
@@ -38,7 +37,7 @@ RSpec.feature 'Action', type: :feature do
       expect(page).to have_content('new header')
     end
   end
-  
+
   context 'edit' do
     scenario 'should be successful' do
       visit edit_post_path(post)

@@ -35,6 +35,8 @@ gem 'rails_admin', '~> 2.0'
 gem "slim-rails"
 # Used to filter the posts
 gem "ransack"
+# Used for full-text search
+gem 'pg_search'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

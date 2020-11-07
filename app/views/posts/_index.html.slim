@@ -1,7 +1,5 @@
 .container
   .row.mt-6.my-3
-    h3
-      | User Posts 
     .col-lg-12
       .row
         - @posts.each do |post|
@@ -14,4 +12,4 @@
               | categoy:#{post.category.title}
               p.card-text= post.body
               a.card-link href="/posts/#{post.id}"  Link
-        = paginate @posts , theme: 'twitter-bootstrap-4'
+    = paginate @posts , theme: 'twitter-bootstrap-4'

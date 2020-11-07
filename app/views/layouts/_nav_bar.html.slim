@@ -6,17 +6,21 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     ul.navbar-nav.mr-auto
       li.nav-item
         a.nav-link href="/posts"  Home
-      li.nav-item
-        a.nav-link href="/posts/user_posts"  User posts
+      - if user_signed_in? && !current_user.admin?
+        li.nav-item 
+          a.nav-link href="/posts/user_posts" Users posts
       - if user_signed_in? && current_user.admin?
         li.nav-item
           a.nav-link href="/posts/posts_for_admin"  Posts for approval
+    = form_tag posts_search_result_path, method: :get, role: 'search' do
+      = text_field_tag :query, params[:query]
+      = submit_tag "Search"
     - if user_signed_in?
       .btn-group
         button.btn.btn-outline-dark.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
           = current_user.user_name
         .dropdown-menu.dropdown-menu-right
-          = link_to 'Create post', new_post_path, class: "dropdown-item"
+          = link_to 'Create post', new_post_path, class: "dropdown-item" unless current_user.admin?
           = link_to 'Edit profile', edit_user_registration_path,  class: "dropdown-item"
           = link_to 'Sign Out', destroy_user_session_path, method: :delete , class: "dropdown-item"
     - else

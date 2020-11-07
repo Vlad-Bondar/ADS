@@ -4,50 +4,50 @@
       .alert.alert-danger role="alert" 
         = attr
         = message
-= form_for @post , url: path , multiple: true ,method: method  do |post|
-  .container
-    - if method.to_s == "post"
-      h1 New Post
-    - else
-      h1 Edit Post
-    .input-group.mb-3
-      .input-group-prepend
-        = post.label :header, class: "input-group-text"
-      = post.text_field :header, class: "form-control" ,readonly: (true if current_user.admin?)
-    .input-group.mb-3
-      .input-group-prepend
-        = post.label :body, class: "input-group-text"
-      = post.text_area :body , class: "form-control", readonly: (true if current_user.admin?)
-    = post.file_field(:images , multiple: true) unless current_user.admin? || !@post.new_record?
-    hr/
-    - @post.images.each_with_index do |image,index|
-      - if @post.images?
-        = image_tag(image.thumb.url, alt: 'Image' , class:"mb-2" )
-        = link_to("Delete", post_image_path(@post, index), :method => :delete, data: { confirm: "Are you sure you want to delete this image?" }) unless current_user.admin?
-    hr/
-    - if can? :create , Category
-      .form-group
-        label for="exampleFormControlSelect1"  Choose category
-        = select(:post,:category_id, options_from_collection_for_select(@categories, "id", "title",  @post.category_id ),{},{class: "form-control"})
-      .form-group
-        h3 Or create a category:
-        = post.fields_for :category, Category.new do |category|
-          = category.label  "New category title:"
-          = category.text_field :title , class: "form-control"
-      h3 You can delete category without posts
-      - @empty_category.each do |category|
-        label= category.title
-        = link_to("Delete", category_path(category), :method => :delete, data: { confirm: "Are you sure you want to delete this image?" })
-        br/
-    .mt-3
-      - if current_user.admin?
-        = post.button "Approved"  , class: "btn btn-success mb-2" , name: "status", value: "approved"
-        = post.button "Reject"  ,class: "btn btn-success mb-2" , name: "status", value: "rejected"
+  = form_for @post , url: path , multiple: true ,method: method  do |post|
+    .container
+      - if method.to_s == "post"
+        h1 New Post
       - else
-        = post.button "Piblish" , class: "btn btn-success mb-2 mr-2" , name: "status", value: "new_post"
-        = post.button "Save as draft" ,class: "btn btn-success mb-2" , name: "status", value: "draft"
-      = link_to('Delete', post_path ,class: "btn btn-danger mb-2", method: :delete , data: { confirm: 'Are you sure?' }) if path == "/posts/#{@post.id}"
-    - unless @post.new_record? || current_user.admin?
-      = form_with model: @post , url: post_images_path(@post) ,method: :post  do |post|
-        = post.file_field :images, multiple: true
-        = post.submit
+        h1 Edit Post
+      .input-group.mb-3
+        .input-group-prepend
+          = post.label :header, class: "input-group-text"
+        = post.text_field :header, class: "form-control" ,readonly: (true if current_user.admin?)
+      .input-group.mb-3
+        .input-group-prepend
+          = post.label :body, class: "input-group-text"
+        = post.text_area :body , class: "form-control", readonly: (true if current_user.admin?)
+      = post.file_field(:images , multiple: true) unless current_user.admin? || !@post.new_record?
+      hr/
+      - @post.images.each_with_index do |image,index|
+        - if @post.images?
+          = image_tag(image.thumb.url, alt: 'Image' , class:"mb-2" )
+          = link_to("Delete", post_image_path(@post, index), :method => :delete, data: { confirm: "Are you sure you want to delete this image?" }) unless current_user.admin?
+      hr/
+      - if can? :create , Category
+        .form-group
+          label for="exampleFormControlSelect1"  Choose category
+          = select(:post,:category_id, options_from_collection_for_select(@categories, "id", "title",  @post.category_id ),{},{class: "form-control"})
+        .form-group
+          h3 Or create a category:
+          = post.fields_for :category, Category.new do |category|
+            = category.label  "New category title:"
+            = category.text_field :title,  class: "form-control"
+        h3 You can delete category without posts
+        - @empty_category.each do |category|
+          label= category.title
+          = link_to("Delete", category_path(category), :method => :delete, data: { confirm: "Are you sure you want to delete this image?" })
+          br/
+      .mt-3
+        - if current_user.admin?
+          = post.button "Approved"  , class: "btn btn-success mb-2" , name: "status", value: "approved"
+          = post.button "Reject"  ,class: "btn btn-success mb-2" , name: "status", value: "rejected"
+        - else
+          = post.button "Piblish" , class: "btn btn-success mb-2 mr-2" , name: "status", value: "new_post"
+          = post.button "Save as draft" ,class: "btn btn-success mb-2" , name: "status", value: "draft"
+        = link_to('Delete', post_path ,class: "btn btn-danger mb-2", method: :delete , data: { confirm: 'Are you sure?' }) if path == "/posts/#{@post.id}"
+  - unless @post.new_record? || current_user.admin?
+    = form_with model: @post , url: post_images_path(@post) ,method: :post  do |post|
+      = post.file_field :images, multiple: true
+      = post.submit

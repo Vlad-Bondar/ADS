@@ -8,3 +8,19 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 end
+=begin
+  
+
+  include PgSearch
+  multisearchable against: :user_name
+
+  after_save :reindex
+
+  private
+
+  def reindex
+    PgSearch::Multisearch.rebuild(User)
+  end
+
+end
+=end
