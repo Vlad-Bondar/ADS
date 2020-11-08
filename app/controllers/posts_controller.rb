@@ -50,9 +50,11 @@ class PostsController < ApplicationController
 
   def edit
     #@post = Post.find(params[:id])
+    
     authorize! :edit, @post
     @categories = Category.all
     @empty_category = find_empty_category
+    
   end
 
   def update

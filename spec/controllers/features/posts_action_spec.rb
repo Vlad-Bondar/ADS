@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Action', type: :feature do
+RSpec.feature 'Post action', type: :feature do
   let(:user) { create(:user) }
   let(:post) { create(:post) }
   let(:category) { create(:category) }
@@ -13,7 +13,7 @@ RSpec.feature 'Action', type: :feature do
   context 'index'  do
     scenario 'Should see all posts' do
       visit root_path
-      expect(page).to have_text('All Posts')
+      expect(page).to have_text('Users posts')
     end
   end
 
@@ -28,10 +28,10 @@ RSpec.feature 'Action', type: :feature do
     let!(:category) { create(:category, id: 1) }
     scenario 'should be successful' do
       visit new_post_path
-      within('form') do
-        fill_in 'post[header]', with: 'new header'
-        fill_in 'post[body]', with: 'body'
-      end
+
+      fill_in 'post[header]', with: 'new header'
+      fill_in 'post[body]', with: 'body'
+
       click_on 'Save as draft'
 
       expect(page).to have_content('new header')

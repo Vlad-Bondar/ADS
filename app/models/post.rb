@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-$LOAD_PATH << File.join(__dir__, "lib")
+$LOAD_PATH << File.join(__dir__, 'lib')
 require 'posts_method.rb'
 
 class Post < ApplicationRecord
   POST_LIFETIME = 3.days
 
-  include PgSearch
-  pg_search_scope :search_everywhere, against: [:header, :body]
+  include PgSearch::Model
+  pg_search_scope :search_everywhere, against: %i[header body]
 
   validates :header, :body, presence: true
   belongs_to :user
@@ -15,9 +15,9 @@ class Post < ApplicationRecord
 
   mount_uploaders :images, AttachmentUploader
 
-  accepts_nested_attributes_for :category, reject_if: :all_blank,allow_destroy: :true
+  accepts_nested_attributes_for :category, reject_if: :all_blank, allow_destroy: true
 
-  #after_save :reindex
+  # after_save :reindex
 
   enum status: {
     draft: 'draft',
@@ -27,7 +27,7 @@ class Post < ApplicationRecord
     published: 'published',
     archived: 'archived'
   }
- 
+
   def self.publish_posts
     posts = Post.where('status = ?', Post.statuses[:approved])
     posts.each(&:published!)
@@ -40,12 +40,10 @@ class Post < ApplicationRecord
     end
   end
 end
-=begin
-  private
-
- 
-  def reindex
-    PgSearch::Multisearch.rebuild(Post)
-  end
-end
-=end
+#   private
+#
+#
+#   def reindex
+#     PgSearch::Multisearch.rebuild(Post)
+#   end
+# end

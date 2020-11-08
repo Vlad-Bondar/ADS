@@ -37,7 +37,7 @@
         h3 You can delete category without posts
         - @empty_category.each do |category|
           label= category.title
-          = link_to("Delete", category_path(category), :method => :delete, data: { confirm: "Are you sure you want to delete this image?" })
+          = link_to("Delete", category_path(category), :method => :delete, data: { confirm: "Are you sure you want to delete this image?" },id: 'delete_category')
           br/
       .mt-3
         - if current_user.admin?
@@ -45,7 +45,7 @@
           = post.button "Reject"  ,class: "btn btn-success mb-2" , name: "status", value: "rejected"
         - else
           = post.button "Piblish" , class: "btn btn-success mb-2 mr-2" , name: "status", value: "new_post"
-          = post.button "Save as draft" ,class: "btn btn-success mb-2" , name: "status", value: "draft"
+          = post.button "Save as draft" ,class: "btn btn-success mb-2 mr-2" , name: "status", value: "draft"
         = link_to('Delete', post_path ,class: "btn btn-danger mb-2", method: :delete , data: { confirm: 'Are you sure?' }) if path == "/posts/#{@post.id}"
   - unless @post.new_record? || current_user.admin?
     = form_with model: @post , url: post_images_path(@post) ,method: :post  do |post|

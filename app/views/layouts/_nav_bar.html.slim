@@ -14,10 +14,10 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
           a.nav-link href="/posts/posts_for_admin"  Posts for approval
     = form_tag posts_search_result_path, method: :get, role: 'search' do
       = text_field_tag :query, params[:query]
-      = submit_tag "Search"
+      = submit_tag "Search", class: 'ml-2 btn btn-info'
     - if user_signed_in?
       .btn-group
-        button.btn.btn-outline-dark.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
+        button.btn.btn-outline-dark.dropdown-toggle.ml-2 aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
           = current_user.user_name
         .dropdown-menu.dropdown-menu-right
           = link_to 'Create post', new_post_path, class: "dropdown-item" unless current_user.admin?

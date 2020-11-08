@@ -1,9 +1,0 @@
-= search_form_for @q  do |f|
-  .container
-    .input-group.mb-2
-      = f.label 'Сategory search', class: 'mr-2'
-      = f.select :category_id_eq, options_from_collection_for_select(find_published_categories, "id", "title", @q.category_id_eq), include_blank: true , data: {remote: true , url: '/posts',methos: 'get'}
-    .input-group.mb-2
-      = f.label 'User search', class: 'mr-2'
-      = f.select :user_id_eq, options_from_collection_for_select(find_published_users, "id", "user_name", @q.user_id_eq), include_blank: true
-    label.btn.btn-secondary id="search_button"  Search

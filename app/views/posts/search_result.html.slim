@@ -1,17 +1,16 @@
 
 .container
-  h3 Результаты поиска по запросу 
-  em= params[:query]
+  h3 Search results
   .row.mt-6.my-3
     .col-lg-12
       .row
         - @search_results.each do |result|
           .card.mx-3.my-3.text-center style=("width: 18rem;") 
-                    .card-body
-                      h5.card-title= result.header
-                      h6.card-subtitle.mb-2.text-muted
-                      | author:#{result.user.user_name}
-                      h6.card-subtitle.mb-2.text-muted
-                      | categoy:#{result.category.title}
-                      p.card-text= result.body
-                      a.card-link href="/posts/#{result.id}"  Link
+            .card-body
+              h5.card-title= result.header
+              h6.card-subtitle.mb-2.text-muted
+              | author:#{result.user.user_name}
+              h6.card-subtitle.mb-2.text-muted
+              | categoy:#{result.category.title}
+              p.card-text= result.body
+              a.card-link href="/posts/#{result.id}"  Link
