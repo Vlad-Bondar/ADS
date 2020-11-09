@@ -6,7 +6,7 @@ require 'posts_method.rb'
 class PostsController < ApplicationController
   include PostsMethods
 
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show search_result]
   before_action :set_post, only: %i[show edit update destroy]  
 
   def index

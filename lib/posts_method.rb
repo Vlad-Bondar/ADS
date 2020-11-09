@@ -12,7 +12,11 @@ module PostsMethods
 
   def search_result
     #byebug
-    @search_results = Post.search_everywhere(params[:query]).where('status = ?', Post.statuses[:published])
+    if params[:query].empty?
+      redirect_to root_path
+    else
+      @search_results = Post.search_everywhere(params[:query]).where('status = ?', Post.statuses[:published])
+    end
   end
 
   def user_posts
