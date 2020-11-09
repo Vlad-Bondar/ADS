@@ -15,4 +15,4 @@
                 - if post.status==Post.statuses[:draft] || (post.status==Post.statuses[:new_post] && current_user.admin?)
                   a.btn.btn-secondary.bg-light.text-muted.border.border-white href="/posts/#{post.id}/edit"  Edit
                 = link_to 'Delete', post,class: "btn btn-secondary bg-light text-muted border border-white", method: :delete, data: { confirm: 'Are you sure?' }
-  
+    = paginate @posts , theme: 'twitter-bootstrap-4'
